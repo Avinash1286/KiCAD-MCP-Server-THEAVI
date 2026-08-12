@@ -1,0 +1,93 @@
+{
+  "name": "@theavi/kicad-mcp",
+  "version": "2.7.1",
+  "description": "AI-assisted PCB design with KiCAD via Model Context Protocol",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "kicad-mcp": "dist/cli.js"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "python/**/*.py",
+    "python/**/*.json",
+    "python/**/*.kicad_sch",
+    "python/**/*.txt",
+    "!python/test_ipc_backend.py",
+    "!python/requirements.txt",
+    "config/default-config.json",
+    "requirements.txt",
+    "requirements-lock.txt",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "start": "node dist/cli.js serve",
+    "dev": "nodemon --watch src --ext ts --exec \"npm run build && node dist/cli.js serve\"",
+    "clean": "node --input-type=module -e \"import { rmSync } from 'node:fs'; rmSync('dist', { recursive: true, force: true })\"",
+    "rebuild": "npm run clean && npm run build",
+    "test": "npm run test:ts && npm run test:py",
+    "test:ts": "vitest run",
+    "test:ts:watch": "vitest",
+    "test:py": "python -m pytest tests/ -v",
+    "test:coverage": "python -m pytest tests/ --cov=python --cov-report=html --cov-report=term",
+    "lint": "npm run lint:ts && npm run lint:py",
+    "lint:ts": "eslint src/",
+    "lint:py": "python -m black --check python/ tests/ && python -m isort --check-only python/ tests/ && python -m mypy python/ && python -m pylint --errors-only python/",
+    "lint:all": "pre-commit run --all-files",
+    "format:py": "python -m black python/ tests/ && python -m isort python/ tests/",
+    "format": "prettier --write \"src/**/*.ts\" \"tests-ts/**/*.ts\" && npm run format:py",
+    "prepare": "npm run build",
+    "prepack": "npm run rebuild",
+    "pretest": "npm run build"
+  },
+  "keywords": [
+    "kicad",
+    "mcp",
+    "model-context-protocol",
+    "pcb-design",
+    "ai",
+    "claude"
+  ],
+  "author": "KiCad MCP contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avinash1286/KiCAD-MCP-Server-THEAVI.git"
+  },
+  "homepage": "https://github.com/Avinash1286/KiCAD-MCP-Server-THEAVI#readme",
+  "bugs": {
+    "url": "https://github.com/Avinash1286/KiCAD-MCP-Server-THEAVI/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.0.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@cfworker/json-schema": "^4.1.1",
+    "@eslint/js": "^10.0.1",
+    "@modelcontextprotocol/client": "2.0.0",
+    "@types/node": "^20.19.0",
+    "eslint": "^10.1.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.2",
+    "vite": "^6.4.3",
+    "vitest": "^3.2.6"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  }
+}

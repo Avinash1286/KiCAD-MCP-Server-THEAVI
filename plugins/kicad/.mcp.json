@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "kicad": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@theavi/kicad-mcp@2.7.1", "serve"],
+      "env": {
+        "KICAD_MCP_LOG_LEVEL": "info"
+      }
+    }
+  }
+}

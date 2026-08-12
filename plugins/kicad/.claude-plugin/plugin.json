@@ -1,0 +1,14 @@
+{
+  "name": "kicad",
+  "version": "2.7.1",
+  "description": "Design, inspect, validate, and export KiCad schematics and PCBs from natural-language prompts.",
+  "author": {
+    "name": "KiCad MCP contributors"
+  },
+  "homepage": "https://github.com/Avinash1286/KiCAD-MCP-Server-THEAVI",
+  "repository": "https://github.com/Avinash1286/KiCAD-MCP-Server-THEAVI",
+  "license": "MIT",
+  "keywords": ["kicad", "pcb", "schematic", "electronics", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}
